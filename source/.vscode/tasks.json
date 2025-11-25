@@ -1,0 +1,38 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"type": "cmake",
+			"label": "CMake: build matrix test",
+			"command": "build",
+			"targets": [
+				"mtest"
+			],
+			"group": "build",
+			"problemMatcher": [],
+			"detail": "CMake build matrix test"
+		},
+		{
+			"type": "cmake",
+			"label": "CMake: build spline",
+			"command": "build",
+			"targets": [
+				"spline"
+			],
+			"group": "build",
+			"problemMatcher": [],
+			"detail": "CMake build spline"
+		},
+		{
+			"type": "cmake",
+			"label": "CMake: build",
+			"command": "build",
+			"targets": [
+				"all"
+			],
+			"group": "build",
+			"problemMatcher": [],
+			"detail": "CMake template build task"
+		}
+	]
+}

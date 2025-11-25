@@ -1,0 +1,11 @@
+{
+	"folders": [
+		{
+			"name": "project2",
+			"path": "."
+		}
+	],
+	"settings": {
+		"cmake.loggingLevel": "info"
+	}
+}

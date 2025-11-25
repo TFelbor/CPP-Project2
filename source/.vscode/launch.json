@@ -1,0 +1,31 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+
+        {
+            "name": "Launch FK/IK Program (help)",
+            "type": "cppvsdbg",
+            "request": "launch" ,
+            "program": "robot_kinematic.exe",
+            "args": ["--help"],
+            "stopAtEntry": false,
+            "cwd": "${fileWorkspaceFolder}",
+            "environment": [],
+            "console":"integratedTerminal"
+        },
+        {
+            "name": "Launch FK/IK Program (default angles)",
+            "type": "cppvsdbg",
+            "request": "launch" ,
+            "program": "robot_kinematic.exe",
+            "args": ["--angles", "-70,-50,90,0,-50,-90", "--xyz", "0.302,-0.594,0.486", "--rpy", "0,90,-90"],
+            "stopAtEntry": false,
+            "cwd": "${fileWorkspaceFolder}",
+            "environment": [],
+            "console":"integratedTerminal"
+        }
+    ]
+}

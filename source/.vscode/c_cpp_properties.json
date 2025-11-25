@@ -1,0 +1,21 @@
+{
+    "configurations": [
+        {
+            "name": "Win32GCC",
+            "includePath": [
+                "${workspaceFolder}/**",
+                "${env:APPDATA}/eigen"
+            ],
+            "defines": [
+                "_DEBUG",
+                "UNICODE",
+                "_UNICODE"
+            ],
+            "compilerPath": "C:/msys64/ucrt64/bin/g++.exe",
+            "intelliSenseMode": "windows-gcc-x64",
+            "cStandard": "c11",
+            "cppStandard": "c++20"
+        }
+    ],
+    "version": 4
+}

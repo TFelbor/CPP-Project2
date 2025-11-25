@@ -1,0 +1,17 @@
+#
+# to build and  compile
+#
+cmake -B .build_linux/Release  -DCMAKE_BUILD_TYPE=Release
+cmake --build .build_linux/Release
+
+#
+# to compile in debug mode
+#
+cmake -B .build_linux/Debug  -DCMAKE_BUILD_TYPE=Debug
+cmake --build .build_linux/Debug
+
+#
+# to run
+#
+
+./robot_kinematic.exe  --angles -70,-50,90,0,-50,-90 --xyz 0.302,-0.594,0.486 --rpy 0,90,-90

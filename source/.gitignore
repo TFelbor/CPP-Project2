@@ -1,0 +1,6 @@
+junk/
+robotic_kinematic*
+build/
+myrobot.py
+robot_kinematic*
+.build_*/
