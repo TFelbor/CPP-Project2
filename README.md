@@ -3,7 +3,7 @@
 This project implements a **Forward Kinematics (FK)** and **Inverse Kinematics (IK)** solver in C++ for a 6-DOF robotic arm (Kinova Gen3). It uses the **Cyclic Coordinate Descent (CCD)** algorithm to solve the IK problem and generates Python scripts to visualize the robot's movement in **Blender**.
 
 ## 🎥 Demo
-[Insert your video demo here]
+[video demo coming soon]
 ## 🚀 Features
 
 * **Forward Kinematics:** Calculates the global 3D position and orientation of the end-effector given a set of joint angles.
