@@ -6,14 +6,14 @@ This project implements a **Forward Kinematics (FK)** and **Inverse Kinematics (
 [Insert your video demo here]
 ## 🚀 Features
 
-* [cite_start]**Forward Kinematics:** Calculates the global 3D position and orientation of the end-effector given a set of joint angles [cite: 242-245].
-* [cite_start]**Inverse Kinematics (CCD):** Solves for the required joint angles to reach a specific target position $(x, y, z)$ and orientation $(r, p, y)$ using the iterative Cyclic Coordinate Descent algorithm [cite: 392-396].
-* [cite_start]**Blender Integration:** Automatically generates a Python script (`my_script.py`) that animates the robot's solution in Blender.
-* [cite_start]**Configurable Robot:** Loads robot configuration (links, joints, limits) from a `config.toml` file[cite: 318].
+* **Forward Kinematics:** Calculates the global 3D position and orientation of the end-effector given a set of joint angles.
+* **Inverse Kinematics (CCD):** Solves for the required joint angles to reach a specific target position $(x, y, z)$ and orientation $(r, p, y)$ using the iterative Cyclic Coordinate Descent algorithm.
+* **Blender Integration:** Automatically generates a Python script (`my_script.py`) that animates the robot's solution in Blender.
+* **Configurable Robot:** Loads robot configuration (links, joints, limits) from a `config.toml` file.
 
 ## 🛠️ Dependencies
 
-[cite_start]The project relies on the following C++ libraries [cite: 551-554]:
+The project relies on the following C++ libraries:
 * **[GLM](https://github.com/g-truc/glm):** For vector and matrix mathematics.
 * **[fmt](https://github.com/fmtlib/fmt):** For safe and fast string formatting.
 * **[toml++](https://github.com/marzer/tomlplusplus):** For parsing the robot configuration file.
@@ -35,7 +35,7 @@ This project implements a **Forward Kinematics (FK)** and **Inverse Kinematics (
     cmake ..
     make
     ```
-    *(On Windows, you may use `cmake --build .` or open the generated Visual Studio solution)*[cite: 846].
+    *(On Windows, you may use `cmake --build .` or open the generated Visual Studio solution)*.
 
 ## 💻 Usage
 
