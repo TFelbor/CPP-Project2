@@ -598,43 +598,42 @@ Robot::forward_kinematic(const std::vector<float>& angles)
 
   logger::info("Compute forward kinematic with angles {:g}", fmt::join(angles_in_degrees, ","));
   
-  logger::info("---- FK code start here");
+  logger::info("---- FK Student code start here");
   // code start
 
   if (angles.size() != nonfixed_joint_indexes_.size()) {
-    logger::error("Mismatch between provided angles count ({}) and degrees of freedom ({})", 
+    logger::error("ERROR: Mismatch between provided angles: ({}) and degrees of freedom: ({})", 
                   angles.size(), nonfixed_joint_indexes_.size());
     return false;
   }
 
-  // 1. Set the angles for all non-fixed joints
+  // Step 1: We need to set the angles for all non-fixed joints
   for (size_t i = 0; i < angles.size(); ++i) {
     Joint& joint = get_ith_nonfixed_joint(i);
     joint.set_angle(angles[i]);
   }
 
-  // 2. Propagate transforms from the root down to the leaves
-  // We use a lambda to recursively update the global transforms
-  std::function<void(Link*)> update_transforms_recursive = [&](Link* link) {
+  // Step 2: We need to propagate transforms from the root down to the leaves
+  // We'll use a lambda to recursively update the global transforms
+  std::function<void(Link*)> recursively_update_transforms = [&](Link* link) {
     link->foreach_child_joint([&](Joint* joint) {
       Link* child_link = joint->child_link();
       
-      // The child's global transform is ParentGlobal * JointLocal
+      // The child's global transform = ParentGlobal * JointLocal
       glm::mat4 child_global = link->get_transform() * joint->get_local_transform();
       child_link->set_transform(child_global);
       
-      // Recursively update the children of this link
-      update_transforms_recursive(child_link);
+      // Use recursion to update the children of this link
+      recursively_update_transforms(child_link);
     });
   };
 
-  // Ensure root starts with its base transform (usually identity)
+  // Make sure the root starts with its base transform 
   p_root_link_->set_transform(root_transform_);
-  update_transforms_recursive(p_root_link_);
+  recursively_update_transforms(p_root_link_);
 
   // code end
-  logger::info("---- FK code finish here");
-
+  logger::info("---- FK Student code finish here");
 
 
   const glm::mat4& target_transform = p_target_link_->get_transform();
@@ -649,17 +648,17 @@ Robot::forward_kinematic(const std::vector<float>& angles)
   return true ;
 }
 
-// Helper function to optimize a single joint
+// Helper function to help optimize the process of a single joint in CCD
 // Returns the distance to target after optimization
 float 
-Robot::cyclic_coordinate_descent_single_joint(Joint& joint, float cyclic_coordinate_descent_cost)
+Robot::CCD_single_joint(Joint& joint, float CCD_cost)
 {
     float best_angle = joint.get_angle();
-    float min_dist = cyclic_coordinate_descent_cost;
+    float min_dist = CCD_cost;
 
     auto [min_a, max_a] = joint.get_min_max_angles();
     
-    // Sampling strategy: iterate over the valid range
+    // Our sampling strategy: iteration over the valid range
     float step = glm::radians(2.0f); // 2 degree step size
     
     // Extract target position
@@ -708,10 +707,10 @@ Robot::inverse_kinematic(IKParams& ik_params)
   
 
 
-  logger::info("---- IK code start here");
-  // code start
+  logger::info("---- IK Student code start here");
+  // student code start
 
-  // Initialize distance
+  // Initialize the distance
   glm::vec3 target_pos = glm::vec3(target_transform_[3]);
   const glm::mat4& start_ee_transform = p_target_link_->get_transform();
   ccd_distance_to_target = glm::distance(glm::vec3(start_ee_transform[3]), target_pos);
@@ -719,12 +718,12 @@ Robot::inverse_kinematic(IKParams& ik_params)
   // CCD Loop
   for(size_t iter = 0; iter < ik_params.nb_iterations_; ++iter) {
       
-      // Iterate joints from End-Effector to Root (reverse order)
+      // Iterate joints from End-Effector to Root (in reverse order)
       for (auto it = nonfixed_joint_indexes_.rbegin(); it != nonfixed_joint_indexes_.rend(); ++it) {
           Joint& joint = joints_[*it];
           
           // Optimize this specific joint
-          ccd_distance_to_target = cyclic_coordinate_descent_single_joint(joint, ccd_distance_to_target);
+          ccd_distance_to_target = CCD_single_joint(joint, ccd_distance_to_target);
       }
 
       // Check for convergence
@@ -738,8 +737,8 @@ Robot::inverse_kinematic(IKParams& ik_params)
       }
   }
 
-  // code end
-  logger::info("---- IK code end here");
+  // student code end
+  logger::info("---- IK Student code end here");
 
   logger::info("Final distance after {} iterations is {}", ik_params.nb_iterations_, ccd_distance_to_target);
 
